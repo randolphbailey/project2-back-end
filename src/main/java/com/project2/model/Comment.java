@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Comment implements Serializable {
 	@Id
 	@Column
@@ -23,18 +27,18 @@ public class Comment implements Serializable {
 
 	@ManyToOne
 	@JoinColumn
-	private User user;
+	private JradUser jradUser;
 
 	@ManyToOne
 	@JoinColumn
 	private Post post;
 
-	public Comment(int id, String content, Timestamp created, User user, Post post) {
+	public Comment(int id, String content, Timestamp created, JradUser jradUser, Post post) {
 		super();
 		this.id = id;
 		this.content = content;
 		this.created = created;
-		this.user = user;
+		this.jradUser = jradUser;
 		this.post = post;
 	}
 
@@ -66,12 +70,12 @@ public class Comment implements Serializable {
 		this.created = created;
 	}
 
-	public User getUser() {
-		return user;
+	public JradUser getJradUser() {
+		return jradUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setJradUser(JradUser jradUser) {
+		this.jradUser = jradUser;
 	}
 
 	public Post getPost() {
@@ -84,8 +88,8 @@ public class Comment implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Comment [id=" + id + ", content=" + content + ", created=" + created + ", user=" + user + ", post="
-				+ post + "]";
+		return "Comment [id=" + id + ", content=" + content + ", created=" + created + ", jradUser=" + jradUser
+				+ ", post=" + post + "]";
 	}
 
 	@Override
@@ -95,8 +99,8 @@ public class Comment implements Serializable {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((jradUser == null) ? 0 : jradUser.hashCode());
 		result = prime * result + ((post == null) ? 0 : post.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -121,17 +125,19 @@ public class Comment implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
+		if (jradUser == null) {
+			if (other.jradUser != null)
+				return false;
+		} else if (!jradUser.equals(other.jradUser))
+			return false;
 		if (post == null) {
 			if (other.post != null)
 				return false;
 		} else if (!post.equals(other.post))
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
 		return true;
 	}
+	
+	
 
 }

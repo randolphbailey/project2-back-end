@@ -4,12 +4,16 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-public class User implements Serializable {
+@Entity
+@Table
+public class JradUser implements Serializable {
 	@Id
 	@Column
 	@GeneratedValue
@@ -34,7 +38,7 @@ public class User implements Serializable {
 	@JoinColumn
 	private Role role;
 
-	public User(int id, String username, String firstName, String lastName, String email, Timestamp created,
+	public JradUser(int id, String username, String firstName, String lastName, String email, Timestamp created,
 			Role role) {
 		super();
 		this.id = id;
@@ -46,7 +50,7 @@ public class User implements Serializable {
 		this.role = role;
 	}
 
-	public User() {
+	public JradUser() {
 		super();
 	}
 
@@ -134,7 +138,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		JradUser other = (JradUser) obj;
 		if (created == null) {
 			if (other.created != null)
 				return false;

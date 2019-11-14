@@ -4,11 +4,15 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table
 public class Post implements Serializable {
 	@Id
 	@Column
@@ -29,13 +33,18 @@ public class Post implements Serializable {
 
 	@ManyToOne
 	@JoinColumn
-	private User user;
+	private JradUser jradUser;
 
 	@ManyToOne
 	@JoinColumn
 	private Status status;
 
-	public Post(int id, String title, String content, Timestamp created, Timestamp lastModified, User user,
+	public Post() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Post(int id, String title, String content, Timestamp created, Timestamp lastModified, JradUser jradUser,
 			Status status) {
 		super();
 		this.id = id;
@@ -43,12 +52,8 @@ public class Post implements Serializable {
 		this.content = content;
 		this.created = created;
 		this.lastModified = lastModified;
-		this.user = user;
+		this.jradUser = jradUser;
 		this.status = status;
-	}
-
-	public Post() {
-		super();
 	}
 
 	public int getId() {
@@ -91,12 +96,12 @@ public class Post implements Serializable {
 		this.lastModified = lastModified;
 	}
 
-	public User getUser() {
-		return user;
+	public JradUser getJradUser() {
+		return jradUser;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setJradUser(JradUser jradUser) {
+		this.jradUser = jradUser;
 	}
 
 	public Status getStatus() {
@@ -110,7 +115,7 @@ public class Post implements Serializable {
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", content=" + content + ", created=" + created
-				+ ", lastModified=" + lastModified + ", user=" + user + ", status=" + status + "]";
+				+ ", lastModified=" + lastModified + ", jradUser=" + jradUser + ", status=" + status + "]";
 	}
 
 	@Override
@@ -120,10 +125,10 @@ public class Post implements Serializable {
 		result = prime * result + ((content == null) ? 0 : content.hashCode());
 		result = prime * result + ((created == null) ? 0 : created.hashCode());
 		result = prime * result + id;
+		result = prime * result + ((jradUser == null) ? 0 : jradUser.hashCode());
 		result = prime * result + ((lastModified == null) ? 0 : lastModified.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
-		result = prime * result + ((user == null) ? 0 : user.hashCode());
 		return result;
 	}
 
@@ -148,6 +153,11 @@ public class Post implements Serializable {
 			return false;
 		if (id != other.id)
 			return false;
+		if (jradUser == null) {
+			if (other.jradUser != null)
+				return false;
+		} else if (!jradUser.equals(other.jradUser))
+			return false;
 		if (lastModified == null) {
 			if (other.lastModified != null)
 				return false;
@@ -163,13 +173,9 @@ public class Post implements Serializable {
 				return false;
 		} else if (!title.equals(other.title))
 			return false;
-		if (user == null) {
-			if (other.user != null)
-				return false;
-		} else if (!user.equals(other.user))
-			return false;
 		return true;
 	}
+	
 	
 	
 }
