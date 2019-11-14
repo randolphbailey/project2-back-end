@@ -26,4 +26,8 @@ public class StatusService {
 	public Status findByStatus(String status) {
 		return statusRepository.findByStatus(status);
 	}
+	
+	public Status newStatus(Status status) {
+		return statusRepository.save(status);
+	}
 }
