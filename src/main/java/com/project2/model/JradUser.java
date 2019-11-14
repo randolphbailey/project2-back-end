@@ -23,6 +23,9 @@ public class JradUser implements Serializable {
 	private String username;
 
 	@Column
+	private String password;
+
+	@Column
 	private String firstName;
 
 	@Column
@@ -38,11 +41,12 @@ public class JradUser implements Serializable {
 	@JoinColumn
 	private Role role;
 
-	public JradUser(int id, String username, String firstName, String lastName, String email, Timestamp created,
-			Role role) {
+	public JradUser(int id, String username, String password, String firstName, String lastName, String email,
+			Timestamp created, Role role) {
 		super();
 		this.id = id;
 		this.username = username;
+		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -68,6 +72,14 @@ public class JradUser implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getFirstName() {
@@ -112,8 +124,8 @@ public class JradUser implements Serializable {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
-				+ ", email=" + email + ", created=" + created + ", role=" + role + "]";
+		return "JradUser [id=" + id + ", username=" + username + ", password=" + password + ", firstName=" + firstName
+				+ ", lastName=" + lastName + ", email=" + email + ", created=" + created + ", role=" + role + "]";
 	}
 
 	@Override
@@ -125,6 +137,7 @@ public class JradUser implements Serializable {
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + id;
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
 		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
@@ -160,6 +173,11 @@ public class JradUser implements Serializable {
 			if (other.lastName != null)
 				return false;
 		} else if (!lastName.equals(other.lastName))
+			return false;
+		if (password == null) {
+			if (other.password != null)
+				return false;
+		} else if (!password.equals(other.password))
 			return false;
 		if (role == null) {
 			if (other.role != null)
