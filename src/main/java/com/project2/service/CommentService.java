@@ -19,14 +19,12 @@ public class CommentService {
 	private CommentRepository commentRepository;
 
 
-	Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-
 	// Create
 	@Transactional
 	public boolean create(Comment comment) {
 
 		try {
-			comment.setCreated(timestamp);
+			comment.setCreated(new Timestamp(System.currentTimeMillis()));
 			commentRepository.save(comment);
 			return true;
 		} catch (Exception e) {
