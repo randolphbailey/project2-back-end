@@ -23,7 +23,7 @@ public class JradUserService {
 	public boolean create(JradUser user) {
 
 		try {
-			user.setPassword(DigestUtils.sha256Hex(user.getPassword());
+			user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
 			jradUserRepository.save(user);
 			return true;
 		} catch (Exception e) {
