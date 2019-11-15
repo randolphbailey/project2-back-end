@@ -7,5 +7,5 @@ import com.project2.model.JradUser;
 
 @Repository
 public interface JradUserRepository extends JpaRepository<JradUser, Integer>{
-
+    JradUser findByUsername(String username);
 }

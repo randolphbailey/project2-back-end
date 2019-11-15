@@ -48,9 +48,13 @@ public class JradUserService {
 		return jradUserRepository.findAll();
 	}
 
-	// public JradUser findByUsername(String role) {
-	// 	return jradUserRepository.findBy(role);
-	// }
+	public JradUser findByUsername(String username) {
+	 	return jradUserRepository.findByUsername(username);
+	 }
+
+	 public int findIdByUsername(String username){
+		return findByUsername(username).getId();
+	 }
 
 	//Update
 	public boolean updatePasswordById(int id, String password){
