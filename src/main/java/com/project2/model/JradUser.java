@@ -19,7 +19,7 @@ public class JradUser implements Serializable {
 	@GeneratedValue
 	private int id;
 
-	@Column
+	@Column(unique=true)
 	private String username;
 
 	@Column
@@ -31,7 +31,7 @@ public class JradUser implements Serializable {
 	@Column
 	private String lastName;
 
-	@Column
+	@Column(unique=true)
 	private String email;
 
 	@Column
