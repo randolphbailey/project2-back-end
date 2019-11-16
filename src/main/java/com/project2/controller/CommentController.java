@@ -25,34 +25,28 @@ public class CommentController {
 	private CommentService cs;
 
 	@PostMapping("/create")
-	public void create(@RequestBody Comment comment){
+	public void create(@RequestBody Comment comment) {
 		cs.create(comment);
 	}
 
 	@GetMapping("/all")
-	public List<Comment> getAllComment(){
+	public List<Comment> getAllComment() {
 		return cs.findAll();
 	}
 
-	@GetMapping("/retrieve/{id}")
+	@GetMapping("/getById/{id}")
 	public Optional<Comment> getCommentById(@PathVariable int id) {
 		return cs.findById(id);
 	}
 
-	@PostMapping("/editcomment")
-	public void updateComment(@RequestBody Comment comment){
+	@PostMapping("/update")
+	public void updateComment(@RequestBody Comment comment) {
 		cs.save(comment);
 	}
 
-	// @PostMapping("/editcommentpost/{post}/{id}")
-	// public void updatePostById(@RequestBody int id, Post post){
-	// 	cs.updatePostById(id, post);
-	// }
-
 	@PostMapping("/delete")
-	public void delete(@RequestBody Comment comment){
+	public void delete(@RequestBody Comment comment) {
 		cs.delete(comment);
 	}
-
 
 }

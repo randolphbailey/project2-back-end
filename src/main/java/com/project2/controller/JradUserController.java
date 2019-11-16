@@ -34,17 +34,17 @@ public class JradUserController {
 		return jus.findAll();
 	}
 
-	@GetMapping("/retrieve/{id}")
+	@GetMapping("/getById/{id}")
 	public Optional<JradUser> getUserById(@PathVariable int id) {
 		return jus.findUserById(id);
 	}
 
-	@GetMapping("/retrieveusername/{user}")
-	public JradUser getUserByUsername(@PathVariable String user) {
-		return jus.findUserByUsername(user);
+	@GetMapping("/getByUsername/{username}")
+	public JradUser getUserByUsername(@PathVariable String username) {
+		return jus.findUserByUsername(username);
 	}
 
-	@PostMapping("/edituser")
+	@PostMapping("/update")
 	public void edit(@RequestBody JradUser user){
 		jus.save(user);
 	}
