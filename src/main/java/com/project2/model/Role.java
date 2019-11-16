@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -14,10 +16,11 @@ public class Role implements Serializable {
 
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "role_sequence", schema = "role_sequence")
 	private int id;
 
-	@Column
+	@Column(nullable = false, unique = true)
 	private String role;
 
 	public Role(int id, String role) {

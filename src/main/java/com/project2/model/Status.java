@@ -5,7 +5,9 @@ import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -13,10 +15,11 @@ import javax.persistence.Table;
 public class Status implements Serializable {
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "status_sequence", schema = "status_sequence")
 	private int id;
 
-	@Column
+	@Column(nullable = false, unique = true)
 	private String status;
 
 	public Status(int id, String status) {
