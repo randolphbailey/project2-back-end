@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import com.project2.model.Post;
-import com.project2.model.Status;
 import com.project2.service.PostService;
 
 @RestController
@@ -23,7 +22,7 @@ public class PostController {
 	@Autowired
 	private PostService ps;
 
-	@PostMapping("/create/{post}")
+	@PostMapping("/create")
 	public void creation(@RequestBody Post post){
 		ps.create(post);
 	}
@@ -38,24 +37,14 @@ public class PostController {
 		return ps.findByStatus(status);
 	}
 
-	@PostMapping("/edittitle/{title}/{id}")
-	public void editTitle(@RequestBody int id, String title){
-		ps.updateTitleById(id, title);
+	@PostMapping("/edit")
+	public void editTitle(@RequestBody Post post){
+		ps.save(post);
 	}
 
-	@PostMapping("/editcontent/{content}/{id}")
-	public void editContent(@RequestBody int id, String content){
-		ps.updateContentById(id, content);
-	}
-
-	@PostMapping("/editstatus/{status}/{id}")
-	public void editStatus(@RequestBody int id, Status status){
-		ps.updateStatusById(id, status);
-	}
-
-	@PostMapping("/delete/{id}")
-	public void delete(@RequestBody int id){
-		ps.deleteById(id);
+	@PostMapping("/delete")
+	public void delete(@RequestBody Post post){
+		ps.delete(post);
 	}
 
 }

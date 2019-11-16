@@ -122,4 +122,13 @@ public class JradUserService {
 			return false;
 		}		
 	}
+
+	public boolean delete(JradUser user){
+		if(jradUserRepository.existsById(user.getId())){
+			jradUserRepository.delete(user);
+			return true;
+		} else{
+			return false;
+		}		
+	}
 }

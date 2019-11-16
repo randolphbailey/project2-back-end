@@ -24,7 +24,7 @@ public class JradUserController {
 	@Autowired
 	private JradUserService jus;
 
-	@GetMapping("/create/{user}")
+	@GetMapping("/create")
 	public void create(@PathVariable JradUser user){
 		jus.create(user);
 	}
@@ -44,34 +44,14 @@ public class JradUserController {
 		return jus.findUserByUsername(user);
 	}
 
-	@PostMapping("/editpassword/{password}/{id}")
-	public void editPassword(@RequestBody int id, String password){
-		jus.updatePasswordById(id, password);
+	@PostMapping("/edituser")
+	public void edit(@RequestBody JradUser user){
+		jus.save(user);
 	}
 
-	@PostMapping("/editfirstname/{first}/{id}")
-	public void editFirstName(@RequestBody int id, String firstName){
-		jus.updateFirstNameById(id, firstName);
+	@PostMapping("/delete")
+	public void delete(@RequestBody JradUser user){
+		jus.delete(user);
 	}
-
-	@PostMapping("/editlastname/{last}/{id}")
-	public void editLastName(@RequestBody int id, String lastName){
-		jus.updateLastNameById(id, lastName);
-	}
-
-	@PostMapping("/editrole/{role}/{id}")
-	public void editRole(@RequestBody int id, Role role){
-		jus.updateRoleById(id, role);
-	}
-
-	@PostMapping("/delete/{id}")
-	public void delete(@RequestBody int id){
-		jus.deleteById(id);
-	}
-
-
-
-
-	
 
 }

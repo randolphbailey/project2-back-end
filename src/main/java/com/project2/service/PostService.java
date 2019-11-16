@@ -98,4 +98,13 @@ public class PostService {
 			return false;
 		}		
 	}
+
+	public boolean delete(Post post){
+		if(postRepository.existsById(post.getId())){
+			postRepository.delete(post);
+			return true;
+		} else{
+			return false;
+		}		
+	}
 }

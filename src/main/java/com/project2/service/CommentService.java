@@ -89,6 +89,15 @@ public class CommentService {
 		}		
 	}
 
+	public boolean delete(Comment comment){
+		if(commentRepository.existsById(comment.getId())){
+			commentRepository.delete(comment);
+			return true;
+		} else{
+			return false;
+		}		
+	}
+
 	
 
 

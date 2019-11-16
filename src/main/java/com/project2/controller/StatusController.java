@@ -38,7 +38,7 @@ public class StatusController {
 		return ss.findByStatus(status);
 	}
 	
-	@PostMapping("/add/{status}")
+	@PostMapping("/add")
 	public Status addStatus(@RequestBody Status status) {
 		return ss.newStatus(status);
 	}
