@@ -1,5 +1,11 @@
 package com.project2.controller;
 
+import java.util.List;
+import java.util.Optional;
+
+import javax.servlet.http.HttpSession;
+
+import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
-
 import com.project2.model.JradUser;
-import com.project2.model.Role;
 import com.project2.service.JradUserService;
 
 @RestController
@@ -24,9 +26,9 @@ public class JradUserController {
 	@Autowired
 	private JradUserService jus;
 
-	@GetMapping("/create")
-	public void create(@PathVariable JradUser user){
-		jus.create(user);
+	@PostMapping("/create")
+	public JradUser create(@RequestBody JradUser user) {
+		return jus.create(user);
 	}
 
 	@GetMapping("/all")
@@ -45,13 +47,30 @@ public class JradUserController {
 	}
 
 	@PostMapping("/update")
-	public void edit(@RequestBody JradUser user){
-		jus.save(user);
+	public void edit(@RequestBody JradUser user) {
+		jus.create(user);
 	}
 
 	@PostMapping("/delete")
-	public void delete(@RequestBody JradUser user){
+	public void delete(@RequestBody JradUser user) {
 		jus.delete(user);
+	}
+
+	@PostMapping("/login")
+	public JradUser login(@RequestBody JradUser user, HttpSession session) {
+		String password = DigestUtils.sha256Hex(user.getPassword());
+		user = jus.findUserByUsername(user.getUsername());
+		if (user.getPassword() == password) {
+			session.setAttribute("user", user);
+			return user;
+		} else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/logout")
+	public void logout(HttpSession session) {
+		session.invalidate();
 	}
 
 }

@@ -7,10 +7,12 @@ import java.util.Arrays;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -18,25 +20,26 @@ import javax.persistence.Table;
 public class Image implements Serializable {
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "image_sequence", schema = "image_sequence")
 	private int id;
 
-	@Column
+	@Column(nullable = false)
 	@Lob
 	private byte[] image;
 
-	@Column
+	@Column(nullable = false)
 	private String contentType;
 
-	@Column
+	@Column(nullable = false)
 	private Timestamp created;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Status status;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Post post;
 
 	public Image(int id, byte[] image, String contentType, Timestamp created, Status status, Post post) {

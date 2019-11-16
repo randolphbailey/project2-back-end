@@ -6,9 +6,11 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,29 +18,30 @@ import javax.persistence.Table;
 public class JradUser implements Serializable {
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "jraduser_sequence", schema = "jraduser_sequence")
 	private int id;
 
-	@Column(unique=true)
+	@Column(unique = true, nullable = false)
 	private String username;
 
-	@Column
+	@Column(nullable = false)
 	private String password;
 
-	@Column
+	@Column(nullable = false)
 	private String firstName;
 
-	@Column
+	@Column(nullable = false)
 	private String lastName;
 
-	@Column(unique=true)
+	@Column(unique = true, nullable = false)
 	private String email;
 
-	@Column
+	@Column(nullable = false)
 	private Timestamp created;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Role role;
 
 	public JradUser(int id, String username, String password, String firstName, String lastName, String email,

@@ -6,9 +6,11 @@ import java.sql.Timestamp;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
@@ -16,21 +18,22 @@ import javax.persistence.Table;
 public class Comment implements Serializable {
 	@Id
 	@Column
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@SequenceGenerator(name = "comment_sequence", schema = "comment_sequence")
 	private int id;
 
-	@Column
+	@Column(nullable = false)
 	private String content;
 
-	@Column
+	@Column(nullable = false)
 	private Timestamp created;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private JradUser jradUser;
 
 	@ManyToOne
-	@JoinColumn
+	@JoinColumn(nullable = false)
 	private Post post;
 
 	public Comment(int id, String content, Timestamp created, JradUser jradUser, Post post) {
