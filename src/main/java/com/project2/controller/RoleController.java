@@ -32,9 +32,9 @@ public class RoleController {
 		return rs.findById(id);
 	}
 
-	@GetMapping("/status/{role}")
-	public Role getStatus(@PathVariable String role) {
-			return rs.findByStatus(role);
+	// @GetMapping("/status/{role}")
+	// public Role getStatus(@PathVariable String role) {
+	// 		return rs.findByStatus(role);
 	}
 
 }

@@ -25,7 +25,7 @@ public class CommentController {
 	private CommentService cs;
 
 	@PostMapping("/create/{comment}")
-	public void commentCreation(@RequestBody Comment comment){
+	public void create(@RequestBody Comment comment){
 		cs.create(comment);
 	}
 
@@ -39,15 +39,15 @@ public class CommentController {
 		return cs.findById(id);
 	}
 
-	@PostMapping("/editcomment/{content}{id}")
+	@PostMapping("/editcommentcontent/{content}/{id}")
 	public void updateContentById(@RequestBody int id, String content){
 		cs.updateContentById(id, content);
 	}
 
-	@PostMapping("/editcomment/{post}{id}")
-	public void updatePostById(@RequestBody int id, Post post){
-		cs.updatePostById(id, post);
-	}
+	// @PostMapping("/editcommentpost/{post}/{id}")
+	// public void updatePostById(@RequestBody int id, Post post){
+	// 	cs.updatePostById(id, post);
+	// }
 
 	@PostMapping("/delete/{id}")
 	public void deleteById(@RequestBody int id, Post post){

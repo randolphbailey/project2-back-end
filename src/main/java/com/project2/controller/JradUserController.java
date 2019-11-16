@@ -24,8 +24,8 @@ public class JradUserController {
 	@Autowired
 	private JradUserService jus;
 
-	@GetMapping("/create/{comment}")
-	public void userCreation(@PathVariable JradUser user){
+	@GetMapping("/create/{user}")
+	public void create(@PathVariable JradUser user){
 		jus.create(user);
 	}
 
@@ -34,7 +34,7 @@ public class JradUserController {
 		return jus.findAll();
 	}
 
-	@GetMapping("/retrieveuser/{id}")
+	@GetMapping("/retrieve/{id}")
 	public Optional<JradUser> getUserById(@PathVariable int id) {
 		return jus.findUserById(id);
 	}
@@ -44,23 +44,23 @@ public class JradUserController {
 		return jus.findUserByUsername(user);
 	}
 
-	@PostMapping("/editpassword/{password}{id}")
-	public void updatePassword(@RequestBody int id, String password){
+	@PostMapping("/editpassword/{password}/{id}")
+	public void editPassword(@RequestBody int id, String password){
 		jus.updatePasswordById(id, password);
 	}
 
-	@PostMapping("/editfirstname/{first}{id}")
-	public void updateFirstName(@RequestBody int id, String firstName){
+	@PostMapping("/editfirstname/{first}/{id}")
+	public void editFirstName(@RequestBody int id, String firstName){
 		jus.updateFirstNameById(id, firstName);
 	}
 
-	@PostMapping("/editlastname/{last}{id}")
-	public void updateLastName(@RequestBody int id, String lastName){
+	@PostMapping("/editlastname/{last}/{id}")
+	public void editLastName(@RequestBody int id, String lastName){
 		jus.updateLastNameById(id, lastName);
 	}
 
-	@PostMapping("/editrole/{role}{id}")
-	public void updateRole(@RequestBody int id, Role role){
+	@PostMapping("/editrole/{role}/{id}")
+	public void editRole(@RequestBody int id, Role role){
 		jus.updateRoleById(id, role);
 	}
 

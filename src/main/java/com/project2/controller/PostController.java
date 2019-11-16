@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 import com.project2.model.Post;
+import com.project2.model.Status;
 import com.project2.service.PostService;
 
 @RestController
@@ -37,17 +38,17 @@ public class PostController {
 		return ps.findByStatus(status);
 	}
 
-	@PostMapping("/edittitle/{title}{id}")
+	@PostMapping("/edittitle/{title}/{id}")
 	public void editTitle(@RequestBody int id, String title){
 		ps.updateTitleById(id, title);
 	}
 
-	@PostMapping("/editcontent/{content}{id}")
+	@PostMapping("/editcontent/{content}/{id}")
 	public void editContent(@RequestBody int id, String content){
 		ps.updateContentById(id, content);
 	}
 
-	@PostMapping("/editstatus/{status}{id}")
+	@PostMapping("/editstatus/{status}/{id}")
 	public void editStatus(@RequestBody int id, Status status){
 		ps.updateStatusById(id, status);
 	}
