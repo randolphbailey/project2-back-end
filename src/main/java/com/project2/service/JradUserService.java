@@ -1,6 +1,7 @@
 package com.project2.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,12 +49,16 @@ public class JradUserService {
 		return jradUserRepository.findAll();
 	}
 
-	public JradUser findByUsername(String username) {
+	public Optional<JradUser> findUserById(int id){
+		return jradUserRepository.findById(id);
+	}
+
+	public JradUser findUserByUsername(String username) {
 	 	return jradUserRepository.findByUsername(username);
 	 }
 
 	 public int findIdByUsername(String username){
-		return findByUsername(username).getId();
+		return findUserByUsername(username).getId();
 	 }
 
 	//Update
@@ -93,7 +98,7 @@ public class JradUserService {
 		}
 	}
 
-	public boolean updatePostById(int id, Role role){
+	public boolean updateRoleById(int id, Role role){
 
 		if(jradUserRepository.existsById(id)){
 			JradUser user = jradUserRepository.findById(id).get();

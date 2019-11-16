@@ -47,6 +47,10 @@ public class PostService {
 		return postRepository.findAll();
 	}
 
+	public List<Post> findByStatus(String status){
+		return postRepository.findByStatus(status);
+	}
+
 	//Update
 	public boolean updateTitleById(int id, String title){
 
