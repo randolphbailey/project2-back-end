@@ -27,7 +27,7 @@ public class RoleService {
 		return roleRepository.findByRole(role);
 	}
 	
-	public Role newStatus(Role role) {
+	public Role updateRole(Role role) {
 		return roleRepository.save(role);
 	}
 }

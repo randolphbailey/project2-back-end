@@ -47,6 +47,10 @@ public class PostService {
 		return postRepository.findAll();
 	}
 
+	public List<Post> findByStatus(String status){
+		return postRepository.findByStatus(status);
+	}
+
 	//Update
 	public boolean updateTitleById(int id, String title){
 
@@ -89,6 +93,15 @@ public class PostService {
 		
 		if(postRepository.existsById(id)){
 			postRepository.deleteById(id);
+			return true;
+		} else{
+			return false;
+		}		
+	}
+
+	public boolean delete(Post post){
+		if(postRepository.existsById(post.getId())){
+			postRepository.delete(post);
 			return true;
 		} else{
 			return false;

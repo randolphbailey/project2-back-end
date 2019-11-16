@@ -28,7 +28,7 @@ public class StatusController {
 		return ss.findAll();
 	}
 	
-	@GetMapping("/{id}")
+	@GetMapping("/id/{id}")
 	public Optional<Status> getStatusById(@PathVariable int id) {
 		return ss.findById(id);
 	}
