@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.project2.model.Post;
 import com.project2.service.PostService;
@@ -31,13 +32,18 @@ public class PostController {
 	public List<Post> getAllPost(){
 		return ps.findAll();
 	}
+	
+	@GetMapping("/getById/{id}")
+	public Optional<Post> getById(@PathVariable int id) {
+		return ps.getById(id);
+	}
 
-	@GetMapping("/retrieveStatus/{status}")
+	@GetMapping("/getByStatus/{status}")
 	public List<Post> getPostWithStatus(@PathVariable String status){
 		return ps.findByStatus(status);
 	}
 
-	@PostMapping("/edit")
+	@PostMapping("/update")
 	public void editTitle(@RequestBody Post post){
 		ps.save(post);
 	}

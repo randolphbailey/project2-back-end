@@ -1,6 +1,7 @@
 package com.project2.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.sql.Timestamp;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -106,5 +107,9 @@ public class PostService {
 		} else{
 			return false;
 		}		
+	}
+	
+	public Optional<Post> getById(int id) {
+		return postRepository.findById(id);
 	}
 }

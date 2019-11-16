@@ -23,11 +23,15 @@ public class RoleService {
 		return roleRepository.findById(id);
 	}
 	
-	public Role findByStatus(String role) {
+	public Role findByRole(String role) {
 		return roleRepository.findByRole(role);
 	}
 	
 	public Role updateRole(Role role) {
+		return roleRepository.save(role);
+	}
+	
+	public Role create(Role role) {
 		return roleRepository.save(role);
 	}
 }

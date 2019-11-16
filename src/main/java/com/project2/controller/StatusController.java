@@ -28,17 +28,17 @@ public class StatusController {
 		return ss.findAll();
 	}
 	
-	@GetMapping("/id/{id}")
+	@GetMapping("/getById/{id}")
 	public Optional<Status> getStatusById(@PathVariable int id) {
 		return ss.findById(id);
 	}
 	
-	@GetMapping("/{status}")
+	@GetMapping("/getByStatus/{status}")
 	public Status getStatusByStatus(@PathVariable String status) {
 		return ss.findByStatus(status);
 	}
 	
-	@PostMapping("/add")
+	@PostMapping("/create")
 	public Status addStatus(@RequestBody Status status) {
 		return ss.newStatus(status);
 	}
