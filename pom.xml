@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>com.project2</groupId>
 	<artifactId>project2-back-end</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1</version>
 	<name>project2-back-end</name>
 	<description>Project2 Back End</description>
 
