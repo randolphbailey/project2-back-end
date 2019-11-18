@@ -1,5 +1,6 @@
 package com.project2.controller;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,7 +61,7 @@ public class JradUserController {
 	public JradUser login(@RequestBody JradUser user, HttpSession session) {
 		String password = DigestUtils.sha256Hex(user.getPassword());
 		user = jus.findUserByUsername(user.getUsername());
-		if (user.getPassword() == password) {
+		if (user.getPassword().equals(password)) {
 			session.setAttribute("user", user);
 			return user;
 		} else {

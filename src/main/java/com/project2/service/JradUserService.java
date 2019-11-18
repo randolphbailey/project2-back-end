@@ -1,5 +1,6 @@
 package com.project2.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,6 +22,7 @@ public class JradUserService {
 
 	public JradUser create(JradUser user) {
 		user.setPassword(DigestUtils.sha256Hex(user.getPassword()));
+		user.setCreated(new Timestamp(System.currentTimeMillis()));
 		return jradUserRepository.save(user);
 	}
 
