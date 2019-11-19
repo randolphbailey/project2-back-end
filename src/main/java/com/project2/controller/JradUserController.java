@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project2.model.JradUser;
+import com.project2.model.Role;
 import com.project2.service.JradUserService;
 
 @RestController
@@ -59,13 +60,17 @@ public class JradUserController {
 
 	@PostMapping("/login")
 	public JradUser login(@RequestBody JradUser user, HttpSession session) {
+		System.out.println("Incoming user password: " + user.getPassword());
 		String password = DigestUtils.sha256Hex(user.getPassword());
+		System.out.println("Incoming user password after hashing: " + password);
 		user = jus.findUserByUsername(user.getUsername());
+		System.out.println("Password field from database: " + user.getPassword());
 		if (user.getPassword().equals(password)) {
 			session.setAttribute("user", user);
 			return user;
 		} else {
-			return null;
+			JradUser invalidUser = new JradUser(0, "invalid", "invalid", "invalid", "invalid", "invalid", new Timestamp(System.currentTimeMillis()), new Role(0, "invalid"));
+			return invalidUser;
 		}
 	}
 	
