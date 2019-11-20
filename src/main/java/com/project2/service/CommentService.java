@@ -98,7 +98,9 @@ public class CommentService {
 		}		
 	}
 
-	
+	public List<Comment> findByPost(Post post) {
+		return commentRepository.findByPost(post);
+	}
 
 
 }

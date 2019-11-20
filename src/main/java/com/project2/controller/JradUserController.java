@@ -60,11 +60,8 @@ public class JradUserController {
 
 	@PostMapping("/login")
 	public JradUser login(@RequestBody JradUser user, HttpSession session) {
-		System.out.println("Incoming user password: " + user.getPassword());
 		String password = DigestUtils.sha256Hex(user.getPassword());
-		System.out.println("Incoming user password after hashing: " + password);
 		user = jus.findUserByUsername(user.getUsername());
-		System.out.println("Password field from database: " + user.getPassword());
 		if (user.getPassword().equals(password)) {
 			session.setAttribute("user", user);
 			return user;

@@ -15,6 +15,7 @@ import java.util.Optional;
 import com.project2.model.Comment;
 import com.project2.model.Post;
 import com.project2.service.CommentService;
+import com.project2.service.PostService;
 
 @RestController
 @CrossOrigin
@@ -23,6 +24,9 @@ public class CommentController {
 
 	@Autowired
 	private CommentService cs;
+	
+	@Autowired
+	private PostService ps;
 
 	@PostMapping("/create")
 	public void create(@RequestBody Comment comment) {
@@ -37,6 +41,11 @@ public class CommentController {
 	@GetMapping("/getById/{id}")
 	public Optional<Comment> getCommentById(@PathVariable int id) {
 		return cs.findById(id);
+	}
+	
+	@GetMapping("/getByPost/{id}")
+	public List<Comment> getCommentsByPost(@PathVariable int id) {
+		return cs.findByPost(ps.getById(id).get());
 	}
 
 	@PostMapping("/update")
