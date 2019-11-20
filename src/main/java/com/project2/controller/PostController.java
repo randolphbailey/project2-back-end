@@ -13,7 +13,10 @@ import java.util.List;
 import java.util.Optional;
 
 import com.project2.model.Post;
+import com.project2.model.Status;
+import com.project2.service.JradUserService;
 import com.project2.service.PostService;
+import com.project2.service.StatusService;
 
 @RestController
 @CrossOrigin
@@ -22,14 +25,16 @@ public class PostController {
 
 	@Autowired
 	private PostService ps;
+	
+	@Autowired
+	private StatusService ss;
+	
+	@Autowired
+	private JradUserService us;
 
 	@PostMapping("/create")
 	public Post creation(@RequestBody Post post){
-		if(ps.create(post)) {
-			return post;
-		} else {
-			return new Post();
-		}
+		return ps.create(post);
 	}
 
 	@GetMapping("/all")
@@ -44,12 +49,17 @@ public class PostController {
 
 	@GetMapping("/getByStatus/{status}")
 	public List<Post> getPostWithStatus(@PathVariable String status){
-		return ps.findByStatus(status);
+		return ps.findByStatus(ss.findByStatus(status));
+	}
+	
+	@GetMapping("/getByUser/{username}")
+	public List<Post> getPostByUser(@PathVariable String username) {
+		return ps.findByUser(us.findUserByUsername(username));
 	}
 
 	@PostMapping("/update")
 	public void editTitle(@RequestBody Post post){
-		ps.save(post);
+		ps.create(post);
 	}
 
 	@PostMapping("/delete")
