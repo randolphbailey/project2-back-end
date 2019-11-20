@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project2.model.JradUser;
 import com.project2.model.Post;
 import com.project2.model.Status;
 import com.project2.repository.PostRepository;
@@ -17,98 +18,81 @@ public class PostService {
 
 	@Autowired
 	private PostRepository postRepository;
-	
-	// Create
-	@Transactional
-	public boolean create(Post post) {
 
-		try {
-			post.setCreated(new Timestamp(System.currentTimeMillis()));
-			postRepository.save(post);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
+	public Post create(Post post) {
+		post.setCreated(new Timestamp(System.currentTimeMillis()));
+		return postRepository.save(post);
 	}
 
-
-	@Transactional
-	public boolean save(Post post) {
-
-		try {
-			postRepository.save(post);
-			return true;
-		} catch (Exception e) {
-			return false;
-		}
-	}
-
-	//Read
 	public List<Post> findAll() {
 		return postRepository.findAll();
 	}
 
-	public List<Post> findByStatus(String status){
+	public List<Post> findByStatus(Status status) {
 		return postRepository.findByStatus(status);
 	}
+	
+	public List<Post> findByUser(JradUser user) {
+		return postRepository.findByjradUser(user);
+	}
 
-	//Update
-	public boolean updateTitleById(int id, String title){
+	// Update
+	public boolean updateTitleById(int id, String title) {
 
-		if(postRepository.existsById(id)){
+		if (postRepository.existsById(id)) {
 			Post post = postRepository.findById(id).get();
 			post.setTitle(title);
-			save(post);
+			create(post);
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
-	public boolean updateContentById(int id, String content){
+	public boolean updateContentById(int id, String content) {
 
-		if(postRepository.existsById(id)){
+		if (postRepository.existsById(id)) {
 			Post post = postRepository.findById(id).get();
 			post.setContent(content);
-			save(post);
+			create(post);
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
-	public boolean updateStatusById(int id, Status status){
+	public boolean updateStatusById(int id, Status status) {
 
-		if(postRepository.existsById(id)){
+		if (postRepository.existsById(id)) {
 			Post post = postRepository.findById(id).get();
 			post.setStatus(status);
-			save(post);
+			create(post);
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
 
-	//Delete
-	public boolean deleteById(int id){
-		
-		if(postRepository.existsById(id)){
+	// Delete
+	public boolean deleteById(int id) {
+
+		if (postRepository.existsById(id)) {
 			postRepository.deleteById(id);
 			return true;
-		} else{
+		} else {
 			return false;
-		}		
+		}
 	}
 
-	public boolean delete(Post post){
-		if(postRepository.existsById(post.getId())){
+	public boolean delete(Post post) {
+		if (postRepository.existsById(post.getId())) {
 			postRepository.delete(post);
 			return true;
-		} else{
+		} else {
 			return false;
-		}		
+		}
 	}
-	
+
 	public Optional<Post> getById(int id) {
 		return postRepository.findById(id);
 	}
