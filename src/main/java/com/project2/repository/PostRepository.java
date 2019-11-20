@@ -11,6 +11,6 @@ import com.project2.model.Status;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Integer>{
-    List<Post> findByStatus(Status status1);
+    List<Post> findByStatus(Status status);
     List<Post> findByjradUser(JradUser jradUser);
 }
