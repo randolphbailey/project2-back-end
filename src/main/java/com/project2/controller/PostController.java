@@ -24,8 +24,12 @@ public class PostController {
 	private PostService ps;
 
 	@PostMapping("/create")
-	public void creation(@RequestBody Post post){
-		ps.create(post);
+	public Post creation(@RequestBody Post post){
+		if(ps.create(post)) {
+			return post;
+		} else {
+			return new Post();
+		}
 	}
 
 	@GetMapping("/all")
