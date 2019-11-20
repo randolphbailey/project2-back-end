@@ -36,4 +36,6 @@ public class RoleTest {
 		assertEquals("User", rs.findById(3).get().getRole());
 	}
 
+	
+
 }
